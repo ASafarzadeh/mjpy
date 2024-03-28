@@ -26,6 +26,6 @@ setup(
             'mjpy = mjpy:main',
         ],
     },
-    long_description = "MjPy is an unofficial python midjourney client. See more info at Github: [https://github.com/ASafarzadeh/MjPy](https://github.com/ASafarzadeh/MjPy)",
+    long_description = "MjPy is an unofficial python midjourney client. See more info at Github: [https://github.com/ASafarzadeh/mjpy](https://github.com/ASafarzadeh/mjpy)",
     long_description_content_type='text/markdown',
 )
