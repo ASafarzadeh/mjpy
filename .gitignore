@@ -1,1 +1,4 @@
 dist/*
+venv/*
+.idea/*
+MjPy.egg-info/*
