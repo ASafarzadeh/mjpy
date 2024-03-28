@@ -29,8 +29,6 @@ def parse_args():
     parser.add_argument('-g', '--guild-id', help='GUILD_ID', required=True)
     parser.add_argument('-ch', '--channel-id', help='CHANNEL_ID', required=True)
     parser.add_argument('-t', '--token', help='AUTH_TOKEN', required=True)
-
-    # parser.add_argument('-c', '--command', help='The command to use on midjourney', nargs='?', default="imagine")
     parser.add_argument('-v', '--verbose', help='Enable Verbosity and display the process in realtime', nargs='?', default=False)
     parser.add_argument('-o', '--output-dir', help='Where to save the Generated images', nargs='?', default=".")
     return parser.parse_args()
@@ -54,6 +52,8 @@ def main() -> None:
         'Content-Type': 'application/json',
     }
     response = requests.post(url, headers=headers, json=data)
+    if verbose:
+        print("Generation Command Sent.")
     if(response.status_code != 204):
         print(f"Error in Command Execution: {response.text}")
         exit()
@@ -78,7 +78,8 @@ def main() -> None:
                     content = content.replace(" ","")
                     if(content == seed):
                         if(len(messages[i]['components']) > 0):
-                            print("TASK READY")
+                            if(verbose):
+                                print("TASK READY")
                             message_id = messages[i]['id']
                             choice_image_url = messages[i]['attachments'][0]['proxy_url']
                             components = messages[i]['components'][0]['components']
@@ -86,7 +87,8 @@ def main() -> None:
                             custom_ids = [button['custom_id'] for button in buttons]
                             done = True
                         else:
-                            print("Task identified, but not ready")
+                            if(verbose):
+                                print("Task identified, but not ready")
                             continue
         except Exception as e:
             print(f"Error: {e}")
@@ -122,8 +124,10 @@ def main() -> None:
         img_data = requests.get(final_url).content
         with open(os.path.join(output_dir,os.path.basename(url.path)), 'wb') as handler:
             handler.write(img_data)
-        print(f"Saved Generation result to {os.path.join(output_dir,os.path.basename(url.path))}")
-    print("Generation Done.")
+        if verbose:
+            print(f"Saved Generation result to {os.path.join(output_dir,os.path.basename(url.path))}")
+    if verbose:
+        print("Generation Done.")
     exit()
 
 if __name__ == "__main__":
