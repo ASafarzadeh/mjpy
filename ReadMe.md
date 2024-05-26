@@ -14,7 +14,7 @@
 / /\/\ \| / ___/| |_| |
 \/    \// \/     \__, |
       |__/       |___/ </pre>
-  <h1 align="center">MjPy</h1>
+  <h1 align="center">MjPy(Temporarily stopped)</h1>
 
   <p align="center">
     An unofficial Midjourney client</a>
